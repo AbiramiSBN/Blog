@@ -4,20 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My Blog</title>
-  <link rel="stylesheet" href="https://cdn.quilljs.com/1.3.6/quill.snow.css" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" />
+  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet" />
   <style>
-    /* Define custom properties for colors */
-    :root {
-      --bg-color: #000;
-      --text-color: #00BFFF;
-      --accent-color: #FF0000;
-    }
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
     /* Global Styles */
     body {
-      background-color: var(--bg-color);
-      color: var(--text-color);
+      background-color: #000; /* black */
+      color: #00BFFF; /* blue */
       font-family: 'Roboto', sans-serif;
       margin: 0;
       padding-top: 60px; /* Space for fixed nav */
@@ -26,13 +20,10 @@
       align-items: center;
     }
 
-    header, nav, main, footer {
-      width: 100%;
-    }
-
     /* Navigation Bar */
     nav {
-      background-color: var(--bg-color);
+      width: 100%;
+      background-color: #000;
       padding: 10px 20px;
       position: fixed;
       top: 0;
@@ -51,25 +42,25 @@
     }
     .nav-links a {
       text-decoration: none;
-      color: var(--text-color);
+      color: #00BFFF;
       font-weight: bold;
     }
 
-    /* Main Content Area */
-    main {
-      max-width: 800px;
+    /* Container Styles */
+    .container {
       width: 80%;
+      max-width: 800px;
+      background-color: #000;
       padding: 20px;
-      margin-bottom: 20px;
       border-radius: 10px;
-      box-shadow: 0 0 20px var(--text-color);
-      background-color: var(--bg-color);
+      box-shadow: 0 0 20px #00BFFF;
+      margin-bottom: 20px;
     }
 
     h1, h2 {
       text-align: center;
       margin-bottom: 20px;
-      color: var(--text-color);
+      color: #00BFFF;
     }
 
     /* Form Inputs */
@@ -77,26 +68,33 @@
       width: 100%;
       padding: 10px;
       margin-bottom: 10px;
-      border: 1px solid var(--text-color);
+      border: 1px solid #00BFFF;
       border-radius: 5px;
-      background-color: var(--bg-color);
-      color: var(--text-color);
+      background-color: #000;
+      color: #00BFFF;
     }
     #searchInput {
+      border: 1px solid #00BFFF;
+      width: 100%;
+      padding: 10px;
       margin-bottom: 20px;
+      border-radius: 5px;
+      background-color: #000;
+      color: #00BFFF;
     }
 
     /* Post Card Styles */
     .info-item {
-      background-color: var(--bg-color);
+      background-color: #000;
       margin: 10px 0;
       padding: 15px;
       border-radius: 5px;
-      border: 1px solid var(--text-color);
+      border: 1px solid #00BFFF;
       display: flex;
       flex-wrap: wrap;
       align-items: flex-start;
     }
+    /* If an image exists, display it on the left */
     .info-item img {
       max-width: 300px;
       max-height: 300px;
@@ -105,19 +103,20 @@
       border-radius: 5px;
       flex-shrink: 0;
     }
+    /* The text content takes the remaining space */
     .info-item > div {
       flex: 1;
     }
     .info-item h2,
     .info-item p {
-      color: var(--text-color);
+      color: #00BFFF;
       margin: 5px 0;
     }
 
-    /* Button Styles */
+    /* Button Styles with RGB Glow on Hover */
     button {
-      background-color: var(--accent-color);
-      color: var(--bg-color);
+      background-color: #FF0000; /* red */
+      color: #000; /* black text for contrast */
       border: none;
       border-radius: 5px;
       cursor: pointer;
@@ -126,10 +125,7 @@
       margin: 5px 2px 0 0;
     }
     button:hover {
-      box-shadow: 0 0 10px var(--accent-color),
-                  0 0 20px var(--text-color),
-                  0 0 30px var(--accent-color),
-                  0 0 40px var(--text-color);
+      box-shadow: 0 0 10px #FF0000, 0 0 20px #00BFFF, 0 0 30px #FF0000, 0 0 40px #00BFFF;
     }
     .toggle-button {
       margin: 10px 0;
@@ -138,21 +134,21 @@
     /* Quill Editor Styles */
     .quill {
       height: 200px;
-      background-color: var(--bg-color);
-      border: 1px solid var(--text-color);
+      background-color: #000;
+      border: 1px solid #00BFFF;
       border-radius: 5px;
-      color: var(--text-color);
+      color: #00BFFF;
     }
     .quill .ql-toolbar {
-      background-color: var(--bg-color);
+      background-color: #000;
       border: none;
       border-radius: 5px 5px 0 0;
     }
     .quill .ql-container {
-      background-color: var(--bg-color);
+      background-color: #000;
       border: none;
       border-radius: 0 0 5px 5px;
-      color: var(--text-color);
+      color: #00BFFF;
     }
 
     /* Modal Styles */
@@ -168,18 +164,18 @@
       background-color: rgba(0, 0, 0, 0.4);
     }
     .modal-content {
-      background-color: var(--bg-color);
+      background-color: #000;
       margin: 15% auto;
       padding: 20px;
-      border: 1px solid var(--text-color);
+      border: 1px solid #00BFFF;
       width: 80%;
       border-radius: 10px;
       text-align: center;
-      color: var(--text-color);
+      color: #00BFFF;
     }
     #countdown {
       font-size: 24px;
-      color: var(--accent-color);
+      color: #FF0000;
     }
 
     /* Fullscreen Modal Styles */
@@ -190,10 +186,11 @@
       padding: 20px;
       position: relative;
       overflow: auto;
-      background-color: var(--bg-color);
-      border: 1px solid var(--text-color);
-      color: var(--text-color);
+      background-color: #000;
+      border: 1px solid #00BFFF;
+      color: #00BFFF;
     }
+    /* In fullscreen, show images larger and centered */
     #fullscreenModal img {
       max-width: 90%;
       height: auto;
@@ -204,87 +201,92 @@
       position: absolute;
       top: 10px;
       right: 10px;
-      background-color: var(--accent-color);
+      background-color: #FF0000;
       border: none;
-      color: var(--bg-color);
+      color: #000;
       padding: 5px 10px;
       cursor: pointer;
     }
 
-    /* Footer */
+    /* Footer - Centered */
     footer {
-      background-color: var(--bg-color);
+      width: 100%;
+      background-color: #000;
       padding: 20px;
-      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     footer p {
       margin: 0;
-      color: var(--text-color);
+      text-align: center;
+      color: #00BFFF;
     }
   </style>
 </head>
 <body>
-  <header>
-    <!-- Navigation Bar -->
-    <nav>
-      <ul class="nav-links">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#archive">Archive</a></li>
-      </ul>
-    </nav>
-  </header>
+  <!-- Navigation Bar -->
+  <nav>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#archive">Archive</a></li>
+    </ul>
+  </nav>
 
-  <main id="home">
+  <!-- Main Blog Container -->
+  <div class="container" id="home">
     <h1>My Blog</h1>
-    <input type="text" id="searchInput" placeholder="Search posts..." oninput="searchPosts()" aria-label="Search Posts">
-    <button class="toggle-button" id="toggleButton" aria-label="Switch view">Switch to Preview</button>
-    <section class="editor" id="editor">
-      <input type="text" id="titleInput" placeholder="Enter title" aria-label="Post Title">
-      <input type="text" id="descriptionInput" placeholder="Enter description" aria-label="Post Description">
-      <select id="categoryInput" aria-label="Post Category">
+    <input type="text" id="searchInput" placeholder="Search posts..." oninput="searchPosts()">
+    <button class="toggle-button" id="toggleButton">Switch to Preview</button>
+    <div class="editor" id="editor">
+      <input type="text" id="titleInput" placeholder="Enter title">
+      <input type="text" id="descriptionInput" placeholder="Enter description">
+      <select id="categoryInput">
         <option value="">Select Category</option>
         <option value="Technology">Technology</option>
         <option value="Lifestyle">Lifestyle</option>
         <option value="Travel">Travel</option>
       </select>
       <div id="editorContainer" class="quill"></div>
-      <input type="file" id="imageInput" accept="image/*" aria-label="Upload Image">
-      <button id="addButton" aria-label="Add Post">Add Post</button>
-    </section>
-    <section class="preview" id="preview" style="display: none;">
+      <input type="file" id="imageInput" accept="image/*">
+      <button id="addButton">Add Post</button>
+    </div>
+    <div class="preview" id="preview">
       <h2>Preview</h2>
       <div id="previewContainer"></div>
-    </section>
-    <section id="infoContainer"></section>
-  </main>
+    </div>
+    <div id="infoContainer"></div>
+  </div>
 
+  <!-- Footer -->
   <footer>
-    <p>&copy; 2025 My Blog. All rights reserved.</p>
+    <div class="container">
+      <p>&copy; 2025 My Blog. All rights reserved.</p>
+    </div>
   </footer>
 
   <!-- Modal for Initial Choice -->
-  <div id="modal" class="modal" role="dialog" aria-modal="true">
+  <div id="modal" class="modal">
     <div class="modal-content">
       <p>Do you want to create a blog post or preview existing posts?</p>
-      <button id="createButton" aria-label="Create Blog Post">Create Blog Post</button>
-      <button id="previewButton" aria-label="Preview Posts">Preview Posts</button>
+      <button id="createButton">Create Blog Post</button>
+      <button id="previewButton">Preview Posts</button>
       <p id="countdown">30</p>
     </div>
   </div>
 
   <!-- Fullscreen Modal for Blog Post View -->
-  <div id="fullscreenModal" class="modal" role="dialog" aria-modal="true">
+  <div id="fullscreenModal" class="modal">
     <div class="modal-content">
-      <button id="closeFullscreen" class="close-button" aria-label="Close Fullscreen">Close</button>
+      <button id="closeFullscreen" class="close-button">Close</button>
       <div id="fullscreenContent"></div>
-      <button id="fullscreenEdit" class="toggle-button" aria-label="Edit Post">Edit</button>
+      <button id="fullscreenEdit" class="toggle-button">Edit</button>
     </div>
   </div>
 
   <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // Element references
       const infoContainer = document.getElementById('infoContainer');
       const titleInput = document.getElementById('titleInput');
       const descriptionInput = document.getElementById('descriptionInput');
@@ -304,8 +306,8 @@
       const fullscreenContent = document.getElementById('fullscreenContent');
       const closeFullscreen = document.getElementById('closeFullscreen');
       const fullscreenEdit = document.getElementById('fullscreenEdit');
-
-      // Variable to track current post in fullscreen view
+      
+      // Global variable to keep track of the post being viewed in full screen
       let currentPostElement = null;
 
       // Initialize Quill editor
@@ -313,7 +315,7 @@
         theme: 'snow',
         modules: {
           toolbar: [
-            [{ header: [1, 2, false] }],
+            [{ 'header': [1, 2, false] }],
             ['bold', 'italic', 'underline'],
             ['image', 'code-block'],
             ['clean']
@@ -321,131 +323,139 @@
         }
       });
 
-      // Load stored posts from localStorage
-      function loadPosts() {
-        const storedPosts = localStorage.getItem('info');
-        if (storedPosts) {
-          infoContainer.innerHTML = storedPosts;
-          attachPostEventListeners();
+      // Load stored info from localStorage
+      function loadInfo() {
+        const storedInfo = localStorage.getItem('info');
+        if (storedInfo) {
+          infoContainer.innerHTML = storedInfo;
+          // Reattach event listeners for "Edit" and "Open" buttons
+          reattachPostEventListeners();
         }
       }
 
-      // Save posts to localStorage
-      function savePosts() {
+      // Save info to localStorage
+      function saveInfo() {
         localStorage.setItem('info', infoContainer.innerHTML);
       }
 
-      // Reattach event listeners to posts after loading from storage
-      function attachPostEventListeners() {
+      // Reattach event listeners after loading posts from storage
+      function reattachPostEventListeners() {
         const posts = infoContainer.getElementsByClassName('info-item');
         Array.from(posts).forEach(post => {
           const openBtn = post.querySelector('.open-btn');
           const editBtn = post.querySelector('.edit-btn');
+          if (openBtn) {
+            openBtn.addEventListener('click', () => {
+              openFullScreen(post);
+            });
+          }
+          if (editBtn) {
+            editBtn.addEventListener('click', () => {
+              loadPostForEdit(post);
+            });
+          }
           const deleteBtn = post.querySelector('.delete-btn');
-          if (openBtn) openBtn.addEventListener('click', () => openFullScreen(post));
-          if (editBtn) editBtn.addEventListener('click', () => loadPostForEdit(post));
-          if (deleteBtn) deleteBtn.addEventListener('click', () => {
-            post.remove();
-            savePosts();
-          });
+          if (deleteBtn) {
+            deleteBtn.addEventListener('click', () => {
+              post.remove();
+              saveInfo();
+            });
+          }
         });
       }
 
-      // Function to create and add a new post
-      function addNewPost() {
-        const newTitle = titleInput.value.trim();
-        const newDescription = descriptionInput.value.trim();
+      // Add new post
+      addButton.addEventListener('click', () => {
+        const newTitle = titleInput.value;
+        const newDescription = descriptionInput.value;
         const newCategory = categoryInput.value;
-        const newContent = quill.root.innerHTML.trim();
-        const newImageFile = imageInput.files[0];
+        const newInfo = quill.root.innerHTML;
+        const newImage = imageInput.files[0];
 
-        // Require a title and content before proceeding
-        if (!newTitle || !newContent) return;
+        if (newTitle && newInfo) {
+          const newDiv = document.createElement('div');
+          newDiv.className = 'info-item';
 
-        // Create post container
-        const postDiv = document.createElement('div');
-        postDiv.className = 'info-item';
+          // If an image is added, create an image element
+          const newImageElement = document.createElement('img');
+          if (newImage) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+              newImageElement.src = e.target.result;
+              newDiv.appendChild(newImageElement);
+              appendContent();
+            };
+            reader.readAsDataURL(newImage);
+          } else {
+            appendContent();
+          }
 
-        // Create inner content container
-        const contentDiv = document.createElement('div');
+          function appendContent() {
+            const newContent = document.createElement('div');
 
-        // Title
-        const titleEl = document.createElement('h2');
-        titleEl.textContent = newTitle;
-        contentDiv.appendChild(titleEl);
+            const newTitleElement = document.createElement('h2');
+            newTitleElement.textContent = newTitle;
 
-        // Description
-        const descEl = document.createElement('p');
-        descEl.textContent = newDescription;
-        contentDiv.appendChild(descEl);
+            const newDescElement = document.createElement('p');
+            newDescElement.textContent = newDescription;
 
-        // Category
-        const categoryEl = document.createElement('p');
-        categoryEl.textContent = `Category: ${newCategory}`;
-        contentDiv.appendChild(categoryEl);
+            const newCategoryElement = document.createElement('p');
+            newCategoryElement.textContent = `Category: ${newCategory}`;
 
-        // Date
-        const dateEl = document.createElement('p');
-        dateEl.textContent = new Date().toLocaleString();
-        contentDiv.appendChild(dateEl);
+            const newInfoElement = document.createElement('div');
+            newInfoElement.innerHTML = newInfo;
 
-        // Post content
-        const postContentEl = document.createElement('div');
-        postContentEl.innerHTML = newContent;
-        contentDiv.appendChild(postContentEl);
+            const dateElement = document.createElement('p');
+            dateElement.textContent = new Date().toLocaleString();
 
-        // Buttons for actions
-        const openButton = document.createElement('button');
-        openButton.textContent = 'Open';
-        openButton.className = 'open-btn';
-        openButton.addEventListener('click', () => openFullScreen(postDiv));
-        contentDiv.appendChild(openButton);
+            // Open Button to view post in fullscreen
+            const openButton = document.createElement('button');
+            openButton.textContent = 'Open';
+            openButton.className = 'open-btn';
+            openButton.addEventListener('click', () => {
+              openFullScreen(newDiv);
+            });
 
-        const editButton = document.createElement('button');
-        editButton.textContent = 'Edit';
-        editButton.className = 'edit-btn';
-        editButton.addEventListener('click', () => loadPostForEdit(postDiv));
-        contentDiv.appendChild(editButton);
+            // Edit Button to load the post in the editor
+            const editButton = document.createElement('button');
+            editButton.textContent = 'Edit';
+            editButton.className = 'edit-btn';
+            editButton.addEventListener('click', () => {
+              loadPostForEdit(newDiv);
+            });
 
-        const deleteButton = document.createElement('button');
-        deleteButton.textContent = 'Delete';
-        deleteButton.className = 'delete-btn';
-        deleteButton.addEventListener('click', () => {
-          postDiv.remove();
-          savePosts();
-        });
-        contentDiv.appendChild(deleteButton);
+            // Delete Button
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.className = 'delete-btn';
+            deleteButton.addEventListener('click', () => {
+              newDiv.remove();
+              saveInfo();
+            });
 
-        // If an image was uploaded, create and insert an image element
-        if (newImageFile) {
-          const imgEl = document.createElement('img');
-          imgEl.alt = 'Post image';
-          const reader = new FileReader();
-          reader.onload = (e) => {
-            imgEl.src = e.target.result;
-            postDiv.insertBefore(imgEl, contentDiv);
-            postDiv.appendChild(contentDiv);
-            savePosts();
-          };
-          reader.readAsDataURL(newImageFile);
-        } else {
-          postDiv.appendChild(contentDiv);
-          savePosts();
+            newContent.appendChild(newTitleElement);
+            newContent.appendChild(newDescElement);
+            newContent.appendChild(newCategoryElement);
+            newContent.appendChild(dateElement);
+            newContent.appendChild(newInfoElement);
+            newContent.appendChild(openButton);
+            newContent.appendChild(editButton);
+            newContent.appendChild(deleteButton);
+            newDiv.appendChild(newContent);
+            infoContainer.appendChild(newDiv);
+
+            // Clear inputs
+            titleInput.value = '';
+            descriptionInput.value = '';
+            categoryInput.value = '';
+            quill.setContents([]);
+            imageInput.value = '';
+            saveInfo();
+          }
         }
+      });
 
-        // Append the new post and clear the form
-        infoContainer.appendChild(postDiv);
-        titleInput.value = '';
-        descriptionInput.value = '';
-        categoryInput.value = '';
-        quill.setContents([]);
-        imageInput.value = '';
-      }
-
-      // Event listener for the Add Post button
-      addButton.addEventListener('click', addNewPost);
-
-      // Load a post into the editor for editing
+      // Function to load a post for editing
       function loadPostForEdit(postElement) {
         const title = postElement.querySelector('h2').textContent;
         const description = postElement.querySelector('p').textContent;
@@ -453,33 +463,40 @@
         const contentHTML = postElement.querySelector('div').innerHTML;
         titleInput.value = title;
         descriptionInput.value = description;
+        // Extract category from "Category: ..."
         categoryInput.value = categoryText.replace('Category: ', '');
         quill.root.innerHTML = contentHTML;
         postElement.remove();
-        savePosts();
+        saveInfo();
+        // Switch to editor view
         editor.style.display = 'block';
         preview.style.display = 'none';
       }
 
-      // Display a post in the fullscreen modal
+      // Function to open a post in full screen view
       function openFullScreen(postElement) {
         currentPostElement = postElement;
+        // Clone post content for full screen view
         fullscreenContent.innerHTML = postElement.innerHTML;
         fullscreenModal.style.display = 'block';
       }
 
-      // Search functionality by title or category
-      window.searchPosts = () => {
+      // Search functionality
+      window.searchPosts = function() {
         const searchTerm = searchInput.value.toLowerCase();
         const posts = infoContainer.getElementsByClassName('info-item');
         Array.from(posts).forEach(post => {
           const title = post.querySelector('h2').textContent.toLowerCase();
           const category = post.querySelector('p:nth-of-type(2)').textContent.toLowerCase();
-          post.style.display = (title.includes(searchTerm) || category.includes(searchTerm)) ? 'flex' : 'none';
+          if (title.includes(searchTerm) || category.includes(searchTerm)) {
+            post.style.display = 'block';
+          } else {
+            post.style.display = 'none';
+          }
         });
       };
 
-      // Toggle between editor and preview modes
+      // Toggle between editor and preview
       toggleButton.addEventListener('click', () => {
         if (editor.style.display === 'none') {
           editor.style.display = 'block';
@@ -493,20 +510,21 @@
         }
       });
 
-      // Update the preview section by cloning posts
+      // Update preview content
       function updatePreview() {
         previewContainer.innerHTML = '';
-        Array.from(infoContainer.children).forEach(post => {
+        const posts = infoContainer.children;
+        for (let post of posts) {
           previewContainer.appendChild(post.cloneNode(true));
-        });
+        }
       }
 
-      // Fullscreen modal close functionality
+      // Fullscreen modal close button functionality
       closeFullscreen.addEventListener('click', () => {
         fullscreenModal.style.display = 'none';
       });
 
-      // Fullscreen modal edit functionality
+      // Fullscreen modal "Edit" button functionality
       fullscreenEdit.addEventListener('click', () => {
         if (currentPostElement) {
           loadPostForEdit(currentPostElement);
@@ -514,17 +532,19 @@
         }
       });
 
-      // Modal countdown and initial choice handling
+      // Show modal on page load
       modal.style.display = 'block';
       let countdown = 30;
       const countdownInterval = setInterval(() => {
+        countdown--;
         countdownDisplay.textContent = countdown;
-        if (--countdown < 0) {
+        if (countdown <= 0) {
           clearInterval(countdownInterval);
-          createButton.click();
+          createButton.click(); // Automatically choose create
         }
       }, 1000);
 
+      // Create and Preview button functionality
       createButton.addEventListener('click', () => {
         modal.style.display = 'none';
         editor.style.display = 'block';
@@ -542,10 +562,8 @@
         clearInterval(countdownInterval);
       });
 
-      // Load posts on startup
-      loadPosts();
+      loadInfo();
     });
   </script>
 </body>
 </html>
-
