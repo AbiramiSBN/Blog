@@ -238,6 +238,11 @@
     <h1>My Blog</h1>
     <input type="text" id="searchInput" placeholder="Search posts..." oninput="searchPosts()">
     <button class="toggle-button" id="toggleButton">Switch to Preview</button>
+    <!-- New buttons for saving and loading blog as JSON -->
+    <button id="saveButton">Save Blog as JSON</button>
+    <input type="file" id="loadInput" style="display:none;" accept=".json">
+    <button id="loadButton">Load Blog from JSON</button>
+    
     <div class="editor" id="editor">
       <input type="text" id="titleInput" placeholder="Enter title">
       <input type="text" id="descriptionInput" placeholder="Enter description">
@@ -306,6 +311,9 @@
       const fullscreenContent = document.getElementById('fullscreenContent');
       const closeFullscreen = document.getElementById('closeFullscreen');
       const fullscreenEdit = document.getElementById('fullscreenEdit');
+      const saveButton = document.getElementById('saveButton');
+      const loadInput = document.getElementById('loadInput');
+      const loadButton = document.getElementById('loadButton');
       
       // Global variable to keep track of the post being viewed in full screen
       let currentPostElement = null;
@@ -496,15 +504,19 @@
         });
       };
 
-      // Toggle between editor and preview
+      // Toggle between editor and preview with fix for duplicate posts
       toggleButton.addEventListener('click', () => {
         if (editor.style.display === 'none') {
+          // Switch to Editor mode
           editor.style.display = 'block';
           preview.style.display = 'none';
+          infoContainer.style.display = 'block'; // Show the original posts container
           toggleButton.textContent = 'Switch to Preview';
         } else {
+          // Switch to Preview mode
           editor.style.display = 'none';
           preview.style.display = 'block';
+          infoContainer.style.display = 'none'; // Hide the original posts container
           toggleButton.textContent = 'Switch to Editor';
           updatePreview();
         }
@@ -532,8 +544,27 @@
         }
       });
 
-      // Show modal on page load
-      modal.style.display = 'block';
+      // Modal "Preview Posts" button functionality with fix for duplicate posts
+      previewButton.addEventListener('click', () => {
+        modal.style.display = 'none';
+        editor.style.display = 'none';
+        preview.style.display = 'block';
+        toggleButton.style.display = 'none';
+        infoContainer.style.display = 'none'; // Hide original posts container in preview mode
+        updatePreview();
+        clearInterval(countdownInterval);
+      });
+
+      // Modal "Create Blog Post" button functionality
+      createButton.addEventListener('click', () => {
+        modal.style.display = 'none';
+        editor.style.display = 'block';
+        preview.style.display = 'none';
+        toggleButton.style.display = 'block';
+        clearInterval(countdownInterval);
+      });
+
+      // Countdown for modal auto-select
       let countdown = 30;
       const countdownInterval = setInterval(() => {
         countdown--;
@@ -544,22 +575,50 @@
         }
       }, 1000);
 
-      // Create and Preview button functionality
-      createButton.addEventListener('click', () => {
-        modal.style.display = 'none';
-        editor.style.display = 'block';
-        preview.style.display = 'none';
-        toggleButton.style.display = 'block';
-        clearInterval(countdownInterval);
+      // Save Blog as JSON functionality
+      saveButton.addEventListener('click', () => {
+        const blogData = {
+          blog: infoContainer.innerHTML
+        };
+        const dataStr = JSON.stringify(blogData);
+        const blob = new Blob([dataStr], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'blog.json';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
       });
 
-      previewButton.addEventListener('click', () => {
-        modal.style.display = 'none';
-        editor.style.display = 'none';
-        preview.style.display = 'block';
-        toggleButton.style.display = 'none';
-        updatePreview();
-        clearInterval(countdownInterval);
+      // Load Blog from JSON functionality
+      loadButton.addEventListener('click', () => {
+        loadInput.click();
+      });
+
+      loadInput.addEventListener('change', (event) => {
+        const file = event.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            try {
+              const loadedData = JSON.parse(e.target.result);
+              if (loadedData.blog) {
+                infoContainer.innerHTML = loadedData.blog;
+                reattachPostEventListeners();
+                saveInfo();
+                updatePreview();
+                alert("Blog loaded successfully!");
+              } else {
+                alert("Invalid blog file.");
+              }
+            } catch (error) {
+              alert("Error loading blog file.");
+            }
+          };
+          reader.readAsText(file);
+        }
       });
 
       loadInfo();
